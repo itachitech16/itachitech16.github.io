@@ -1,88 +1,189 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Itachi Tech</title>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Itachi Tech · Clean, fast and simple Android apps</title>
+<meta name="description" content="A small indie studio making clean, fast and simple Android apps.">
+<style>
+:root{
+  --brand:#C8102E; --brand-ink:#fff;
+  --bg:#F7F5F2; --surface:#FFFFFF; --surface-2:#F0EDE8; --ink:#16171A; --ink-2:#4A4D55; --line:#E4E0D9;
+  --dark:#16171A; --dark-ink:#F4F2EE; --dark-2:#A9ACB4;
+  --radius:20px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1012; --surface:#18191C; --surface-2:#202226; --ink:#EDEBE7; --ink-2:#A5A8B0; --line:#2A2C31;
+  --dark:#202226; --dark-ink:#EDEBE7; --dark-2:#A5A8B0;
+}}
+:root[data-theme="dark"]{
+  --bg:#0F1012; --surface:#18191C; --surface-2:#202226; --ink:#EDEBE7; --ink-2:#A5A8B0; --line:#2A2C31;
+  --dark:#202226; --dark-ink:#EDEBE7; --dark-2:#A5A8B0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.ic{width:22px;height:22px;fill:currentColor;flex:none}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f0f0f;
-            color: #ffffff;
-            text-align: center;
-        }
-        header {
-            padding: 60px 20px;
-        }
-        h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: auto;
-            opacity: 0.8;
-        }
-        .section {
-            padding: 40px 20px;
-        }
-        a.button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 25px;
-            background: #ff4757;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-            font-size: 14px;
-            opacity: 0.6;
-        }
-    </style>
-</head>
+/* top bar */
+.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:-.01em}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;
+  font-size:13px;font-weight:900;letter-spacing:-.02em}
+.top nav a{color:var(--ink-2);text-decoration:none;font-size:15px;font-weight:600}
+.top nav a:hover{color:var(--ink)}
 
-<body>
-    <header>
-        <h1>Itachi Tech</h1>
-        <p>
-            Welcome to Itachi Tech — a small indie software studio focused on creating clean,
-            fast, and user-friendly Android applications.  
-            We build apps that make everyday tasks simple and enjoyable.
-        </p>
+/* hero */
+.hero{position:relative;overflow:hidden;padding:56px 0 40px}
+.hero:before{content:"";position:absolute;top:-220px;right:-160px;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--acc) 28%,transparent),transparent);pointer-events:none}
+.hero .wrap{position:relative;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.app-icon{width:96px;height:96px;border-radius:24px;box-shadow:0 12px 32px -12px color-mix(in srgb,var(--acc) 70%,transparent);background:var(--surface)}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+.eyebrow .ic{width:16px;height:16px}
+h1{font-size:clamp(34px,6vw,52px);line-height:1.05;letter-spacing:-.03em;margin:6px 0 8px}
+.meta{color:var(--ink-2);font-size:15px}
+.draft{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:99px;background:#FDECC8;color:#7A4A00;font-weight:700;font-size:12px}
+.lead{max-width:680px;font-size:19px;color:var(--ink-2);margin:22px 0 0}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px 7px 10px;border-radius:99px;background:var(--surface);
+  border:1px solid var(--line);font-size:14px;font-weight:600}
+.pill .ic{width:18px;height:18px;color:var(--acc)}
 
-        <a class="button" href="https://play.google.com/store/apps/dev?id=8535370629150322150" target="_blank">
-            View Our Apps
-        </a>
-    </header>
+/* glance */
+.glance{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:8px 0 48px}
+.g{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.g .bubble{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px;
+  background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+.g.neg .bubble{background:color-mix(in srgb,var(--brand) 14%,transparent);color:var(--brand)}
+.g h3{margin:0 0 4px;font-size:17px;letter-spacing:-.01em}
+.g p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.5}
 
-    <div class="section">
-        <h2>What We Do</h2>
-        <p>
-            • Android app development  
-            • UI/UX-focused mobile tools  
-            • Media & entertainment apps  
-            • Simple, powerful user experiences  
-        </p>
-    </div>
+/* layout with contents */
+.layout{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start;padding-bottom:64px}
+.toc{position:sticky;top:82px;font-size:14px}
+.toc b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+.toc a{display:block;padding:7px 12px;border-left:2px solid var(--line);color:var(--ink-2);text-decoration:none}
+.toc a:hover{color:var(--ink);border-color:var(--acc)}
+section{scroll-margin-top:80px;margin-bottom:52px}
+h2{display:flex;align-items:baseline;gap:12px;font-size:26px;letter-spacing:-.02em;margin:0 0 18px}
+h2 .n{font-size:14px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
 
-    <div class="section">
-        <h2>Contact</h2>
-        <p>
-            For support or business inquiries, email us at:  
-            <br />
-            <strong>itachi.tech16@gmail.com</strong>
-        </p>
-    </div>
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.checks li{display:flex;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.checks .ic{color:#1E9E5A;margin-top:2px}
 
-    <footer>
-        © 2025 Itachi Tech — All rights reserved.
-    </footer>
-</body>
-</html>
+.svc{display:grid;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card h3{margin:0;font-size:19px;letter-spacing:-.01em}
+.tag{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:color-mix(in srgb,var(--acc) 12%,transparent);color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chip{font-size:13px;padding:4px 10px;border-radius:8px;background:var(--surface-2);color:var(--ink)}
+.lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+.card p{margin:0 0 8px}
+.note{display:flex;gap:10px;margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--surface-2);font-size:15px;color:var(--ink-2)}
+.note .ic{width:18px;height:18px;color:var(--acc);margin-top:3px}
+.secure{display:flex;gap:10px;align-items:center;color:var(--ink-2);font-size:15px;margin-top:14px}
+.secure .ic{color:#1E9E5A}
+
+.never{background:var(--dark);color:var(--dark-ink);border-radius:var(--radius);padding:26px}
+.never ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 24px}
+.never li{display:flex;gap:10px;align-items:flex-start}
+.never .ic{color:#FF6B7D;margin-top:2px}
+
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.choices .card{display:flex;gap:14px;padding:18px}
+.choices .bubble{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;
+  background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+.choices h3{font-size:16px;margin:0 0 2px}
+.choices p{margin:0;font-size:15px;color:var(--ink-2)}
+
+.small{color:var(--ink-2)}
+.contact{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-radius:var(--radius);padding:28px;
+  background:linear-gradient(135deg,var(--acc),color-mix(in srgb,var(--acc) 55%,#000));color:#fff}
+.contact h2{color:#fff;margin:0 0 4px}
+.contact p{margin:0;opacity:.85}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none}
+.btn.solid{background:#fff;color:#16171A}
+.btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35)}
+
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink-2);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--ink-2)}
+
+@media (max-width:900px){
+  .glance{grid-template-columns:repeat(2,1fr)}
+  .layout{grid-template-columns:1fr;gap:0}
+  .toc{display:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero{padding:36px 0 28px}
+  .app-icon{width:72px;height:72px;border-radius:18px}
+  .glance,.choices,.never ul{grid-template-columns:1fr}
+  .lead{font-size:17px}
+  .contact{padding:22px}
+}
+
+.know{display:grid;gap:12px}
+.know .card{display:flex;gap:14px;padding:18px}
+.know .bubble{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;
+  background:color-mix(in srgb,var(--acc) 14%,transparent);color:var(--acc)}
+.know h3{font-size:16px;margin:0 0 2px}
+.know p{margin:0;font-size:15px;color:var(--ink-2)}
+.plain{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.plain p{margin:0 0 10px}.plain p:last-child{margin:0}
+.golink{display:flex;justify-content:space-between;align-items:center;gap:14px;text-decoration:none;color:var(--ink);
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;font-weight:700}
+.golink span{display:flex;align-items:center;gap:12px}.golink .ic{color:var(--acc)}
+.golink span span{display:block}
+.golink small{display:block;font-weight:400;color:var(--ink-2);font-size:15px}
+
+.home-hero{padding:72px 0 44px}
+.home-hero .wrap{display:block}
+.home-hero h1{font-size:clamp(40px,8vw,68px);max-width:760px}
+.home-hero h1 em{font-style:normal;color:var(--acc)}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 56px}
+.app{--a:var(--acc);display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:22px;position:relative;overflow:hidden}
+.app:before{content:"";position:absolute;top:-90px;right:-90px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--a) 22%,transparent),transparent);pointer-events:none}
+.app img{width:64px;height:64px;border-radius:16px;box-shadow:0 10px 24px -12px color-mix(in srgb,var(--a) 70%,transparent)}
+.app h3{margin:16px 0 2px;font-size:20px;letter-spacing:-.01em}
+.app p{margin:0 0 18px;color:var(--ink-2);font-size:15px;flex:1}
+.app .get{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:12px;
+  background:var(--a);color:#fff;font-weight:700;font-size:15px;text-decoration:none}
+.app .get .ic{width:18px;height:18px}
+.app .sub{display:flex;gap:16px;margin-top:14px;font-size:14px;font-weight:600}
+.app .sub a{color:var(--ink-2);text-decoration:none}.app .sub a:hover{color:var(--ink)}
+.sec-title{font-size:26px;letter-spacing:-.02em;margin:0 0 18px}
+.values{margin-bottom:56px}
+@media (max-width:900px){.apps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.apps{grid-template-columns:1fr}.home-hero{padding:44px 0 28px}}
+</style></head>
+<body style="--acc:#C8102E">
+<header class="top"><div class="wrap">
+  <a class="brand" href="./"><span class="mark">IT</span>Itachi Tech</a>
+  <nav><a href="./#apps">All apps</a></nav>
+</div></header>
+<div class="hero home-hero"><div class="wrap">
+  <span class="eyebrow">Indie Android studio</span>
+  <h1>Clean, fast and <em>simple</em> Android apps.</h1>
+  <p class="lead">Itachi Tech is a small indie studio. We make everyday tools that open fast, respect your privacy and stay out of your way.</p>
+</div></div>
+<main class="wrap">
+  <h2 class="sec-title" id="apps" style="scroll-margin-top:80px">Our apps</h2>
+  <div class="apps"><div class="app" style="--a:#B88400"><img src="usebee/icon.png" alt="UseBee icon"><h3>UseBee</h3><p>Expiry date tracker and scanner</p><a class="get" href="https://play.google.com/store/apps/details?id=com.usebee.expiry.data.tracker" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="usebee/help/">Help</a><a href="usebee/privacy/">Privacy</a><a href="usebee/terms/">Terms</a></div></div><div class="app" style="--a:#D6455F"><img src="music-player/icon.png" alt="Music Player icon"><h3>Music Player</h3><p>Offline music and video player</p><a class="get" href="https://play.google.com/store/apps/details?id=com.itachi.music.player.mp3" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="music-player/help/">Help</a><a href="music-player/privacy/">Privacy</a><a href="music-player/terms/">Terms</a></div></div><div class="app" style="--a:#3F66D6"><img src="calculator/icon.png" alt="Calculator icon"><h3>Calculator</h3><p>Scientific calculator</p><a class="get" href="https://play.google.com/store/apps/details?id=com.basic.app.calculator" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="calculator/help/">Help</a><a href="calculator/privacy/">Privacy</a><a href="calculator/terms/">Terms</a></div></div><div class="app" style="--a:#B8307A"><img src="wallpapers-4k/icon.png" alt="4KHub icon"><h3>4KHub</h3><p>HD and 4K wallpapers</p><a class="get" href="https://play.google.com/store/apps/details?id=com.itachitech.photohub.hdwallpapers.hdbackgrounds" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="wallpapers-4k/help/">Help</a><a href="wallpapers-4k/privacy/">Privacy</a><a href="wallpapers-4k/terms/">Terms</a></div></div><div class="app" style="--a:#D97706"><img src="flashlight/icon.png" alt="Flashlight icon"><h3>Flashlight</h3><p>Torch, flash alerts and SOS</p><a class="get" href="https://play.google.com/store/apps/details?id=com.torch.led.light.flashlight" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="flashlight/help/">Help</a><a href="flashlight/privacy/">Privacy</a><a href="flashlight/terms/">Terms</a></div></div><div class="app" style="--a:#157A7A"><img src="qr-scanner/icon.png" alt="QR Scanner icon"><h3>QR Scanner</h3><p>QR and barcode scanner</p><a class="get" href="https://play.google.com/store/apps/details?id=com.quick.qrcode.scanner.reader" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Get it on Google Play</a><div class="sub"><a href="qr-scanner/help/">Help</a><a href="qr-scanner/privacy/">Privacy</a><a href="qr-scanner/terms/">Terms</a></div></div></div>
+  <h2 class="sec-title">How we make apps</h2>
+  <div class="glance values"><div class="g"><div class="bubble"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 1H7C5.9 1 5 1.9 5 3v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg></div><h3>Your data stays yours</h3><p>Our apps keep your things on your phone. No account needed.</p></div><div class="g"><div class="bubble"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3 18.2 21l-1.6-7 5.4-4.7-7.2-.6L12 2 9.2 8.7 2 9.3 7.4 14l-1.6 7z"/></svg></div><h3>Pay once</h3><p>Pro is a one-time purchase, not a subscription.</p></div><div class="g"><div class="bubble"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM4 12c0-4.4 3.6-8 8-8 1.8 0 3.5.6 4.9 1.7L5.7 16.9C4.6 15.5 4 13.8 4 12zm8 8c-1.8 0-3.5-.6-4.9-1.7L18.3 7.1C19.4 8.5 20 10.2 20 12c0 4.4-3.6 8-8 8z"/></svg></div><h3>Never sold</h3><p>We never sell your data. Every app has a privacy page in plain words.</p></div><div class="g"><div class="bubble"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></div><h3>Real support</h3><p>Write to us. We read every message and reply by email.</p></div></div>
+  <section id="contact"><div class="contact"><div><h2>Say hello</h2><p>Questions, problems or ideas: we&#x27;d love to hear from you.</p></div><div class="btns"><a class="btn solid" href="mailto:itachi.tech16@gmail.com?subject=Itachi Tech"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>itachi.tech16@gmail.com</a><a class="btn ghost" href="https://docs.google.com/forms/d/e/1FAIpQLSdzVxMug2ozkx52yLa0R1F5GKUSzwhszGnpmWaANB7ka2-2kg/viewform"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>Feedback form</a></div></div></section>
+</main>
+<footer><div class="wrap">
+  <span>© Itachi Tech · Indie Android apps</span>
+  <span><a href="./#apps">All apps</a> · <a href="mailto:itachi.tech16@gmail.com">Contact</a></span>
+</div></footer>
+</body></html>
